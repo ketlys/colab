@@ -8,12 +8,13 @@ import (
 	"flag"
 	"log"
 	"math"
+	"math/rand"
 	"net"
 	"strings"
 	"sync"
 	"time"
-  "fmt"
-  "os"
+	  "fmt"
+	  "os"
 
 	"github.com/valyala/fasthttp"
 )
