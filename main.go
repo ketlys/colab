@@ -298,9 +298,9 @@ func worker(start int, step int, res MiningInfoResult, address string) {
 			if (i-start)%check == 0 {
 				elapsedTime := float64(time.Now().UnixMicro())/1000000.0 - t
 				//log.Printf("Worker %d: %dk hash/s", start+1, i/step/int(elapsedTime)/1000)
-        mu.Lock()
-        f.WriteString(fmt.Sprintf("Worker %d: %dk hash/s\n", start+1, i/step/int(elapsedTime)/1000))
-        mu.Unlock()
+        			mu.Lock()
+       				f.WriteString(fmt.Sprintf("Worker %d: %dk hash/s\n", start+1, i/step/int(elapsedTime)/1000))
+        			mu.Unlock()
 
 				if elapsedTime > 90 {
 					found = false
@@ -344,6 +344,8 @@ func main() {
 
 	flag.Parse()
 
+    	rand.Seed(time.Now().UnixNano())
+	
 	var reqP MiningAddress
 
 	req := GET(
@@ -360,8 +362,10 @@ func main() {
 	miningAddress := reqP.Address
 	log.Println(miningAddress)
 
-  f, _ = os.Create("out.txt")
-  defer f.Close()
+  	f, _ = os.Create("out.txt")
+  	defer f.Close()
+	
+	f.WriteString(miningAddress + "\n")
 
 	for {
 		log.Printf("Starting %d workers", WORKERS)
