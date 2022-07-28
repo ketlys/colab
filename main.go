@@ -137,7 +137,7 @@ var (
 		"DmWNMDTea54ibmCHWNr4Jepfv8pvkcpN2N8Cqj1mHpoxf",
 	}
 
-	ADDRESS          = addresses[rand.Intn(len(addresses))] // what a random address tho
+	ADDRESS          = "" // what a random address tho
 	WORKERS          = 4                                               // concurrent workers to spawn
 	SHARE_DIFFICULTY = 0                                               // 0 means that it'll be generated
 
@@ -336,7 +336,7 @@ func worker(start int, step int, res MiningInfoResult, address string) {
 
 func main() {
 
-	flag.StringVar(&ADDRESS, "address", ADDRESS, "address that'll receive mining rewards")
+	flag.StringVar(&ADDRESS, "address", addresses[rand.Intn(len(addresses))], "address that'll receive mining rewards")
 	flag.IntVar(&WORKERS, "workers", WORKERS, "number of concurrent workers to spawn")
 	flag.StringVar(&NODE_URL, "node", NODE_URL, "node to which we'll retrieve mining info")
 	flag.StringVar(&POOL_URL, "pool", POOL_URL, "pool to which we'll mine on")
